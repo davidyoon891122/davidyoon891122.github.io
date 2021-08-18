@@ -86,3 +86,50 @@
 
 + 앱 생명주기
     * 앱실행 -> 인액티브 -> 액티브 -> 백그라운드 -> 서스팬드 -> 스톱
+
+5. UIView
++ UIViewController
+    * 큰 장면 덩어리를 관리 
+    * UIViewController를 만들면 자동적으로 하나의 UIView가 따라온다.
++ 화면에 보이는 것들의 기본속성
+    * 사각형이 기본
+    * 사각형을 그리기 위한 위치, 크기 필요
+    * (x,y), width, height -> frame
+    * 색깔(Color)
++ IOS 좌표계
+    * 왼쪽 위에서 부터 (0,0) 시작 -> 처음 constrains 없이 뷰 넣으면 왼쪽 상단에 몰려있음
++ UIView 생성
+    * CGRect testRect = CGRectMake(0,0,30,30);
+    * UIView *testView = [[UIView alloc] initWithFrame: testRect];
++ 화면에 뷰 추가
+    * addSubView
+    * [부모뷰 addSubView: 자식뷰]
+    * [self.view addSubView: testView];
++ 색추가
+    * self.view.backgroundcolor = UIColor.redColor;
+    * testView.backgroundcolor = [UIColor blueColor];
+
+6. UIView_2
++ [parent addSubView child];
++ 화면에서 삭제하기
+    * [child removeFromSuperview];
++ 부모뷰 뿐만 아니라 다른뷰에도 addSubView 가능
+    * [secondView addSubView:thirdView];
+    * 좌표가 0,0이면 secondView 왼쪽위에서 부터 그려짐 기준이 부모 왼쪽 위에 점으로 시작
++ 이동시키기
+    * frame 에 들어가는 CGRect 좌표로 view 이동 가능
+    * secondView.frame = CGRectMake(200,200,70,70); 으로 이동 가능
++ 화면 숨기기
+    * hidden
+    * thirdView.hidden = true;
++ 투명도
+    * alpha
+    * min: 0, max: 1.0
+    * 투명도가 줄어드는 것이라 0이어도 메모리는 잡아먹음
+    * 페이드효과 만들 때 사용
+    * [UIView animationWithDuration:0.4 delay: 1.0f options:UIViewAnimationOptionCurveEaseIn animations:^{
+        thirdView.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        
+    }]
+    
