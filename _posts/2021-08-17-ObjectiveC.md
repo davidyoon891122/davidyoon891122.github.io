@@ -156,5 +156,20 @@
     * 뷰에 태그 붙이기 
         - self.view.tag = 20 (기본값은 0)
 
-
-
+8. UILabel
++ text
+    * 사용자에게 단순히 보여지는 text
+        - 메뉴 가격 (static form)
+    * 사용자가 입력할 수 있는 text
+        - 글쓰기 form (input form)
+    * 사용자의 행위에 따라 변하는 text
+        - 장바구니 가격 form (dynamic form)
++ UILabel 은 static, dynamic에 적합
++ UILable 속성
+    * 사격형
+    * 텍스트
+    * 배경색
+    * font
+        - testLabel.font = [UIFont systemFontOfSize:30];
+    * textAlignment
+        - testLabel.textAlignment = NSTextAlignmentCenter;
