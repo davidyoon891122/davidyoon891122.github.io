@@ -132,4 +132,29 @@
     } completion:^(BOOL finished) {
         
     }]
-    
+
+7. Self, Super
++ Self
+    * 나 자신, 현재 메소드가 변수가 소속되어 있는 Class
+    * ViewController.m 에서 self는 ViewController
+    * Appdelegate.m 에서는 self = appDelegate
+    * .h 파일에서 self사용할 일 없음
+    * 다른언어에서는 this라고 불림
+
++ Super
+    * 내 위에 무언가를 지칭한다
++ 상속
+    * 그대로 물려받다. [inherit]
+    * UIView 상속 받아 새로운 뷰 생성 가능
++ superclass
+    * 내가 상속받은 class
+    * NSObject(최상의 클래스) -> UIResponder -> UIViewController 
+    * NSObject -> UIResponder -> Appdelegate
++ superview
+    * self.view.superview 는 null 자동 생성 뷰이기 떄문에 슈퍼뷰 없음
+    * testView.superview 는 UIView(self.view)
+    * 뷰에 태그 붙이기 
+        - self.view.tag = 20 (기본값은 0)
+
+
+
