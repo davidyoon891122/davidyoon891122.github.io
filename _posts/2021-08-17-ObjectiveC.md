@@ -173,3 +173,24 @@
         - testLabel.font = [UIFont systemFontOfSize:30];
     * textAlignment
         - testLabel.textAlignment = NSTextAlignmentCenter;
+
+9. UIImageView
++ UIImage
+    * 이미지 파일 데이터를 화면에 쉽게 출력할 수 있게 도와주는 도구
+    * file -> data -> UIImage -> UIImageView -> 사용자
++ UIImageView 생성
+    * UIImage *testImage = [UIImage imageNamed: @"imageName.png"];
+    * UIImageView *testImageView = [[UIImageView alloc] initWithFrame: CGRectMake(0,0, 200,200);
+    * testImageView.image = testImage;
+    * testImageView.contentMode = UIViewContentModeScaleAspectFill -> 원본 비율에 맞게 크기 채워서 이미지 출려 옵션
+    * testImageView.contentMode = UIViewContentModeScaleAspectFit -> 원본 비율에 맞게 프레임 사이즈에 맞게 이미지 출력 옵션
+    * [self.view addSubView:testImageView];
+
++ 프레임 사이즈 출력
+    * NSLog(@"%@", NSStringFromCGRect(testImageView));
+
++ 파일 경로 가져오기
+    * NSString *path = [[UIBundle mainBundle] pathForResource:@"fileName", ofType:@"fileType"];
+    * NSData *data = [NSData dataWithContentOfFile:path];
+    * UIImage *imageWithData = [UIImage imageWithData: data];
+    
