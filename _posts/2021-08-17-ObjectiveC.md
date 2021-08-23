@@ -194,3 +194,39 @@
     * NSData *data = [NSData dataWithContentOfFile:path];
     * UIImage *imageWithData = [UIImage imageWithData: data];
     
+10. UIButton
++ UIButton 생성
+    * UIButton *testButton = [UIButton buttonWithType: UIButtonTypeCustom];
+    * testButton.frame = CGRectMake(50,50,50,50);
++ UIButtonTypeRoundedRect 
+    * setTitle 가능
+    * UIButton *testButton = [UIButton buttonWithType: UIButtonTypeRoundedRect]
+    * [testButton setTitle:@"Test" forState:UIControlStateNormal];
+
++ UIButtonTypeCustom
+    * image 삽입 가능
+    * UIButton *userButton = [UIButton buttonWithType: UIButtonTypeCustom];
+    * UIImage *image = [UIImage imageNamed:@"imageName.jpg"];
+    * [userButton setBackgroundImage:image forState:UIControlStateNormal];
+
++ Event
+    * [testButton addTarget:self action:@selector(touchedEvent:) forControlEvents: UIControlEventTouchUpInside];
+    * sender 이벤트 처리
+        - (void) touchedEvent: (UIButton) sender {
+            NSLog(@"Button Clicked! %@", sender.tag);
+        }
+    * button.tag = 10 -> 넣어서 sender 구분
+        - if (sender.tag == 10)
+
+11. 지역변수 전역변수
+* 지역변수
+    + 함수 내에서 선언되는 변수
+    + 함수내에서만 사용 가능한 변수
+* 전역변수
+    + .h 파일 인터페이스 아래에 선언
+    + 변수 타입과 변수명만 선언(초기화 x)
+    + UIView *testView;
+    + ctrl+command+화살표 위아래 하면 .m .h파일 전환 가능
+
+12. UITextField
++ 
