@@ -229,4 +229,21 @@
     + ctrl+command+화살표 위아래 하면 .m .h파일 전환 가능
 
 12. UITextField
-+ 
++ UITextField 생성
+    * UITextField *testField = [[UITextField alloc]initWithFrame: CGRectMake(50,50,200,50)];
+    * textField.borderStyle = UITextBorderStyleLine;
++ Placeholder
+    * textField.placeholder = @"test placeholder";
++ secureTextEntry
+    * textField.secureTextEntry = true;
+
+13. UIView 제어
++ UIView 생성
+    * UIView *sampleView = [[UIView alloc] initWithFrame:CGRectMake(50,50,100,100)];
+    * sampleView.backgroundColor = UIColor.redColor;
+    * [self.view addSubview: sampleView];
++ frame 좌표 변경
+    * CGRect sampleFrame = sampleView.frame
+    * sampleFrame.origin.x += 10;
+    * sampleView.frame = sampleFrame
+    

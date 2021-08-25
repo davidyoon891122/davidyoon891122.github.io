@@ -99,3 +99,83 @@
         optional func ~~
         optional func ~~
     }
+
+### ImageView
++ URL에서 이미지 가져오는 방법
+    * let url = imageURL
+    * let imageData = NSData(contentOf: url as URL)
+    * UIImage image = UIImage(data: imageData as Data)
++ UIImageView set
+    * image {
+        set {
+            imageView.image = newValue
+            imageView.sizeToFit()
+            scrollView?.contentSize = imageView.frame
+        }
+    }
+
+### Mulithreading
++ 멀티 쓰레딩이란, 일을 처리하는 별도의 쓰레드를 갖추는 것이다.
++ 싱글코어프로세서에서도 시분할 방식으로 문맥교환을 통해 여러 쓰레드를 작동시킨다
++ IOS에서 멀티 쓰레딩은 queue와 같다
++ 이 큐는 IOS 함수들을 포함하고 있다 (대부분 여기에 들어간 함수는 클로져로 되어 있다)
++ 큐는 여러개가 존재할 수 있고 스시템은 각각의 큐에서 꺼내서 각각의 쓰레드에서 동작시킨다
++ 시리얼큐(serial)는 큐에 있는 첫 번째 테스크가 끝나면 그 다음 테스크는 꺼내는 방식의 큐이다.
++ 병렬큐(concurrent)는 큐에서 테크를 꺼내 처리하는 동안 놀고있는 다른 쓰레드에서 다음 것들을 바로 처리하는 방식
++ Main Queue
+    * 가장 중요한 큐 (very special serial queue)
+    * 메인 큐는 모든 UI가 작동해야 할 곳에서 사용된다.
+    * 이와 반대로 시간이나 리소스를 잡아먹는 UI외의 모든 처리는 메인큐 밖에서 처리해야만 한다.
+    * 메인 큐에서 동작하는 것들은 직렬로 처리된다.
+    * UI가 순서대로 예상가능하게 표현되어야 하기 떄문인다.
+    * 메인 큐가 클로져나 함수를 꺼내 작업을 처리하는 유일한 떄는 메인큐가 한가할 때이다.
++ Other Queue
+    * UI가 아닌 것들을 처리하는데 사용하는 큐
+
++ 큐에 뭔가를 집어넣는 방법
+    * dispatch_async(queue) {
+        /* do what you want to do here */ <- 클로저임 
+    }
+    * 2개의 arguments를 받음
+        - queue
+        - func(closure)
++ The Main Queue
+    * main queue call
+        - dispatch_get_main_queue() 함수 사용 -> swift 3.0 미만
+        - DispatchQueue.main.async
++ The Other Queue
+    * 다른 큐를 사용하는 방법은 시스템이 제공하는 병렬 큐들을 사용
+    * 시스템이 제공하는 4가지 큐
+    * 4개의 큐는 각자 맡고 있는 서비스(Quality Of Service)가 있다.
+    * QOS는 시스템이 얼마나 특정 서비스에 중점을 두느냐를 말한다 -> 우선순위로 이해해도 된다.
+    * 4가지 QOS
+        - USER_INTERACTIVE: 가장 우선순위가 높은 큐 메인큐는 아니지만 즉각 처리가 필요한 부분
+        - USER_INITIATED: 유저가 처리를 요청했지만 상호작용이 필요한 처리는 아님 시간은 조금 걸리지만 바로 처리해야함
+        - UTILITY: 뒤에서 오랫동안 작동하는 작업 데이터를 가져오거나 데이터 베이스를 비운다던지 하는 경우
+        - BACKGROUND: 오늘 해도 되고 내일 해도 되는 작업
+    * other queue call
+        - dispatch_get_global_queue(<one of the QOS>, 0) // 0 is a "reserved for future" 언젠가를 위해 남겨둔다는 의미로 항상 0으로 세팅
+        - DispatchQueue.global.async
++ User Create Queue
+    * custome queue call
+        - dispatch_queue_create("name", DISPATCH_QUEUE_SERIAL)
+        - DispatchQueue(label:"queuename")
+    * 메인 큐 까지는 아니지만 높은 우선순위의 직렬큐로 생성된다.
++ GCD(Grand Central Dispatch)
+    * 따로 공부해라
++ 추상적인 API
+    * NSOpertaionQueue and NSOperation
+    * 서로 다른 쓰레드에서 동작하는 2개의 객체가 서로 의존성이 있을때 사용
++ IOS API관점에서 멀티 쓰레딩
+    * IOS 전반에는 쓰레드를 사용해서 비동기적으로 처리하는 수많은 메소드가 있다
+    * 메소들의 인자중 하나인 클로저를 살펴보면 된다.
+    * 클로저는 비동기으로 메인 큐 바깥에서 처리될 것
+    * 대표적인 예 URLSession
+
+### UITextField
++ UITextField는 UILabel과 같지만 텍스트를 편집할 수 있다.
++ UITextField가 "first responder"가 되면 키보드가 나타난다.
++ 키보드를 숨기고 싶으면 resignFirstResponder를 사용하면 된다.
++ Delegate 주로 return키와 함께 사용된다.
++ 키보드를 설정하려면 UITextField를 통하면 된다.
++ 키보드위에 커스텀 뷰 올릴때 inputAccessoryView
